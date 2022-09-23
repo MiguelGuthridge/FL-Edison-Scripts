@@ -1,0 +1,14 @@
+"""
+Binary search quiz
+
+A script that uses the ScriptDialog and Util.ShowMessage tools
+to make the user guess a number between 1 and 100, and generates a little chip
+tune as a reward for guessing correctly.
+"""
+
+import enveditor
+import _random
+
+
+# Generate number between 1 and 100
+num = int(_random.Random().random() * 101)
