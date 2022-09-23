@@ -1,0 +1,55 @@
+"""
+Binary search quiz
+
+A script that uses the ScriptDialog and Util.ShowMessage tools
+to make the user guess a number between 1 and 100, and generates a little chip
+tune as a reward for guessing correctly.
+"""
+
+from enveditor import ScriptDialog, Utils
+import _random
+
+
+def completion_feedback(guesses: int) -> str:
+    if guesses == 1:
+        return "You got it in 1 guess! Amazing job!"
+    elif guesses >= 7:
+        return f"You got it in {guesses} guesses. That is below average."
+    else:
+        return f"You got it in {guesses} guesses! Good job!"
+
+
+def get_guess(num_guesses: int, subtitle: str) -> float:
+    form = ScriptDialog(
+        "Guess the number",
+        f"{subtitle} You've made {num_guesses} attempt{'s' if num_guesses != 1 else ''}"
+    )
+    form.AddInputKnob("Guess", 1, 1, 100)
+    if not form.Execute():
+        raise StopIteration()
+    return round(form.GetInputValue("Guess"))
+
+
+def main():
+    # Generate number between 1 and 100
+    rng = _random.Random()
+    rng.seed()
+    answer = int(rng.random() * 100) + 1
+
+    attempts = 0
+    guess = -1
+    subtitle = "It's somewhere between 1 and 100..."
+    while guess != answer:
+        guess = get_guess(attempts, subtitle)
+        attempts += 1
+        if guess < answer:
+            subtitle = f"{guess} was too low!"
+        elif guess > answer:
+            subtitle = f"{guess} was too high!"
+    Utils.ShowMessage(completion_feedback(attempts))
+
+
+try:
+    main()
+except StopIteration:
+    pass
