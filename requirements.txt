@@ -1,0 +1,12 @@
+attrs==22.1.0
+FL-Studio-API-Stubs==20.6.0
+flake8==5.0.4
+jsonschema==4.16.0
+mccabe==0.7.0
+mypy==0.971
+mypy-extensions==0.4.3
+pycodestyle==2.9.1
+pyflakes==2.5.0
+pyrsistent==0.18.1
+tomli==2.0.1
+typing_extensions==4.3.0
